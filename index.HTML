@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>عيد ميلاد زينب 🎂💗</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Tahoma, Arial, sans-serif;
+  background: linear-gradient(135deg, #ffe0ed, #f5e5ff, #fff0d9);
+  color: #67334f;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+main {
+  width: 92%;
+  max-width: 560px;
+  margin: auto;
+  padding: 35px 0;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 2px solid white;
+  border-radius: 28px;
+  padding: 28px 20px;
+  box-shadow: 0 12px 35px #c77ba733;
+}
+
+h1 {
+  color: #d84d8b;
+  font-size: 28px;
+  line-height: 1.8;
+}
+
+h2 {
+  color: #cf4d8b;
+  font-size: 22px;
+  line-height: 1.8;
+}
+
+p {
+  font-size: 17px;
+  line-height: 2;
+}
+
+.big {
+  font-size: 75px;
+  margin: 12px 0;
+}
+
+button {
+  border: none;
+  border-radius: 18px;
+  padding: 14px 18px;
+  margin: 7px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  background: #e85d9e;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #b83f78;
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #b83f78;
+}
+
+button.secondary {
+  background: #a779d4;
+  box-shadow: 0 5px 0 #8054a9;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.message {
+  background: #fff0f7;
+  border-radius: 20px;
+  padding: 18px;
+  margin-top: 20px;
+  line-height: 2;
+  animation: appear 0.4s ease;
+  overflow-wrap: anywhere;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 15px auto;
+  border-radius: 20px;
+  border: 4px solid white;
+  box-shadow: 0 5px 18px #d58bb455;
+}
+
+footer {
+  margin: 24px 0 5px;
+  font-size: 13px;
+  color: #95677f;
+}
+
+.heart {
+  position: fixed;
+  top: -35px;
+  pointer-events: none;
+  animation: fall 4s linear forwards;
+  z-index: 5;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+  <!-- شاشة الهدية -->
+
+  <section class="card" id="giftScreen">
+
+    <div class="big">🎁</div>
+
+    <h1>يا زينب، عندي لك شيء 👀💗</h1>
+
+    <p>
+      قبل كل شيء، ممنوع تضحكي على الهدية 😂<br>
+      يلا افتحيها يا أحلى عشرينية!
+    </p>
+
+    <button onclick="openGift()">
+      افتحي الهدية 🎀
+    </button>
+
+  </section>
+
+
+  <!-- صفحة عيد الميلاد -->
+
+  <section class="card hidden" id="birthday">
+
+    <div class="big">🎂🎉</div>
+
+    <h1>
+      كل عام وأنتِ بخير يا زينب 💗
+    </h1>
+
+    <p>
+      كل عام وصديقة الكلية ,<br>
+      وأول بنت تعرّفت عليها، بخير.<br>
+      وصرتِ أحلى عشرينية يادي🤏🏻🎀
+    </p>
+
+    <p>
+      وبما إن اليوم يومك، عندك ثلاث مفاجآت.<br>
+      اختاري بحذر، ترا ما أضمن لك النتيجة 😭😂
+    </p>
+
+    <h2>اختاري يادي🎀</h2>
+
+    <button onclick="reveal(1)">
+      فضيحتك 😂
+    </button>
+
+    <button class="secondary" onclick="reveal(2)">
+      كم أنا محظوظة؟ 🥹
+    </button>
+
+    <button onclick="reveal(3)">
+      رسالة سرية 🤫
+    </button>
+
+    <div id="surprise" class="message hidden"></div>
+
+    <div style="margin-top: 25px;">
+
+      <button class="secondary" onclick="finalMessage()">
+        باقي شيء ما قلته لك 💗
+      </button>
+
+    </div>
+
+    <div id="ending" class="message hidden"></div>
+
+  </section>
+
+  <footer>
+    سويتها لك بمحبة يا زينب، فتحمّلي الدلع اليوم 😂💗
+  </footer>
+
+</main>
+
+
+<script>
+
+// فتح الهدية
+
+function openGift() {
+  document.getElementById("giftScreen").classList.add("hidden");
+
+  document.getElementById("birthday").classList.remove("hidden");
+
+  makeHearts();
+}
+
+
+// الأزرار الثلاثة
+
+function reveal(number) {
+
+  const box = document.getElementById("surprise");
+
+  const ending = document.getElementById("ending");
+
+  ending.classList.add("hidden");
+
+
+  // الزر الأول: فضيحة زينب
+
+  if (number === 1) {
+
+    box.innerHTML = `
+      <h2>هاي يادي😂🚨</h2>
+
+      <img
+        src="zainab.jpg"
+        alt="زينو"
+        class="photo"
+      >
+
+      <p>
+        كيف الصورة يادي😭😭😂
+      </p>
+
+      <p>
+        مصدوم🤣💗
+      </p>
+    `;
+
+  }
+
+
+  // الزر الثاني: كلام من القلب
+
+  else if (number === 2) {
+
+    box.textContent =
+      "تدرين؟ أحيانًا أفكر كيف أول بنت تعرّفت عليها بالكلية صارت من أقرب الناس لي. ما كنت أعرف وقتها إننا بنوصل لذي الدرجة من الميانة والضحك والفضفضة. صدق أنا مبسوطة إنك كنتِ أول وحدة، ومبسوطة أكثر إن صداقتنا استمرت وصار بيننا كل ذا. ويمكن ما أقول لك هالكلام كثير، بس أنا فعلًا أقدّرك وأحب وجودك بحياتي، وأتمنى مهما تغيّرت الأيام وانشغلنا تظل علاقتنا مثل ما هي. 🤍";
+
+  }
+
+
+  // الزر الثالث: الرسالة السرية
+
+  else if (number === 3) {
+
+    box.textContent =
+      "بقول لك سر يادي  🤭🤭 أنتِ أقرب وحدة لي من البنات، وأكثر وحدة أزعجها وأكلمها، يعني تقريبًا صرتِ تسمعي كل شيء عندي سواء رضيتي أو لا 😂💗 الله يعينك عليّ، لأن ما عندي أي نية أخفف إزعاجي لك قريبًا. أحبك يادي، وكل سنة وأنتِ معي يا رب 🥹💕";
+
+  }
+
+
+  box.classList.remove("hidden");
+
+  box.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+}
+
+
+// الرسالة الأخيرة
+
+function finalMessage() {
+
+  const box = document.getElementById("ending");
+
+  box.textContent =
+    "كل عام وأنتِ بخير يا زينب، وإن شاء الله هذي السنة تكون حلوة عليك وتفرحي فيها بأشياء كثيرة نفسك فيها. يا رب أشوفك دايم مبسوطة وناجحة ومطمئنة، وتكون أيامك الجاية أحلى من اللي راحت. ومهما صار ومهما انشغلنا، أتمنى تظل بيننا كلامنا وضحكنا وفضفضتنا والملصقات، وتظلي الشخص اللي أقدر أكلمه بعفوية وأكون على طبيعتي معه. أحبك يا بنت، احس الكلام غريب واني اقوله واستحيتو🤭😂💗";
+
+  box.classList.remove("hidden");
+
+  makeHearts();
+
+  box.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+}
+
+
+// قلوب متحركة
+
+function makeHearts() {
+
+  const symbols = ["💗", "💕", "🎀", "✨", "💖"];
+
+  for (let i = 0; i < 22; i++) {
+
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+
+    heart.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.animationDelay = Math.random() * 2 + "s";
+
+    heart.style.fontSize =
+      (16 + Math.random() * 18) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6500);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
